@@ -11,19 +11,19 @@ from queue import Queue
 
 def parser():
     parser = argparse.ArgumentParser(description="YOLO Object Detection")
-    parser.add_argument("--input", type=str, default=0,
+    parser.add_argument("--input", type=str, default=2,
                         help="video source. If empty, uses webcam 0 stream")
     parser.add_argument("--out_filename", type=str, default="",
                         help="inference video name. Not saved if empty")
-    parser.add_argument("--weights", default="yolov4.weights",
+    parser.add_argument("--weights", default="./backup/custom-yolov4-detector_final.weights",
                         help="yolo weights path")
     parser.add_argument("--dont_show", action='store_true',
                         help="windown inference display. For headless systems")
     parser.add_argument("--ext_output", action='store_true',
                         help="display bbox coordinates of detected objects")
-    parser.add_argument("--config_file", default="./cfg/yolov4.cfg",
+    parser.add_argument("--config_file", default="./cfg/custom-yolov4-detector.cfg",
                         help="path to config file")
-    parser.add_argument("--data_file", default="./cfg/coco.data",
+    parser.add_argument("--data_file", default="./data/obj.data",
                         help="path to data file")
     parser.add_argument("--thresh", type=float, default=.25,
                         help="remove detections with confidence below this value")
@@ -175,6 +175,7 @@ if __name__ == '__main__':
     darknet_width = darknet.network_width(network)
     darknet_height = darknet.network_height(network)
     input_path = str2int(args.input)
+    print(input_path)
     cap = cv2.VideoCapture(input_path)
     video_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     video_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
